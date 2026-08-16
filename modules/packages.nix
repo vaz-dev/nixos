@@ -7,6 +7,7 @@
 		alacritty
 		zellij
 		gh
+		appimage-run
 	];
 
 	programs.firefox.enable = true;
