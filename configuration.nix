@@ -7,7 +7,6 @@
 	imports = [
 		./hardware-configuration.nix
 		./modules/boot.nix
-		./modules/kde.nix
 		./modules/users.nix
 		./modules/networking.nix
 		./modules/desktop.nix

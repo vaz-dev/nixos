@@ -8,6 +8,9 @@
 		zellij
 		gh
 		appimage-run
+		mako
+		hyprpaper
+		bolt-launcher
 	];
 
 	programs.firefox.enable = true;

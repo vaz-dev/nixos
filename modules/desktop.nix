@@ -4,8 +4,14 @@
 		enable = true;
 		settings = {
 			default_session = {
-				command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${pkgs.kdePackages.plasma-workspace}/bin/startplasma-wayland";
+				command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
 			};
 		};
+	};
+
+	programs.hyprland = {
+		enable = true;
+		xwayland.enable =  true;
+		
 	};
 }
