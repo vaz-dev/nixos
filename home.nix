@@ -160,4 +160,34 @@
     style = builtins.readFile ./waybar.style.css;
   };
   
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      shell = {
+        program = "${pkgs.zellij}/bin/zellij";
+        args = [ "--layout" "default" ];
+      };
+    };
+  };
+
+  programs.zellij = {
+    enable = true;
+    settings = {
+      default_layout = "compact";
+      pane_frames = false;
+    };
+  };
+
+  xdg.configFile."zellij/layouts/default.kdl".text = ''
+    layout {
+      pane command="bash" {
+        args "-c" "fastfetch; exec bash"
+      }
+    }
+  '';
+
+  programs.helix = {
+    enable = true;
+    settings.editor.theme = "ashen";
+  };
 }
