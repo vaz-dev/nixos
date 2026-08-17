@@ -165,7 +165,7 @@
     settings = {
       terminal.shell = {
         program = "${pkgs.zellij}/bin/zellij";
-        args = [ "--layout" "default" ];
+        args = [ "--layout" "default" "attach" "-c" "main" ];
       };
     };
   };
@@ -174,7 +174,6 @@
     enable = true;
     settings = {
       default_layout = "compact";
-      pane_frames = false;
     };
   };
 
@@ -189,5 +188,12 @@
   programs.helix = {
     enable = true;
     settings.editor.theme = "ashen";
+  };
+
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      PS1='\[\e[34m\]\u@\h \[\e[90m\]\w \[\e[34m\]>\[\e[0m\] '
+    '';
   };
 }
