@@ -63,7 +63,7 @@
         "$mod, Q, killactive"
         "$mod, V, togglefloating"
         "$mod, F, fullscreen"
-        "$mod, R, exec, rofi -show drun"
+        "$mod, R, exec, rofi -show drun -run-command \"nvidia-offload {cmd}\""
 
         "$mod, H, movefocus, l"
         "$mod, L, movefocus, r"
