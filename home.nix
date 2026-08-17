@@ -163,7 +163,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      shell = {
+      terminal.shell = {
         program = "${pkgs.zellij}/bin/zellij";
         args = [ "--layout" "default" ];
       };
