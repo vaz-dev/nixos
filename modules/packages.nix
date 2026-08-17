@@ -11,6 +11,9 @@
 		mako
 		hyprpaper
 		bolt-launcher
+		networkmanagerapplet
+		kdePackages.dolphin
+		rofi
 	];
 
 	programs.firefox.enable = true;
@@ -24,4 +27,7 @@
 			mesa
 		];
 	};
+
+    programs.appimage.enable = true;
+    programs.appimage.binfmt = true;
 }

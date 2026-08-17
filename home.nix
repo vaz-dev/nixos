@@ -43,6 +43,8 @@
       exec-once = [
         "$terminal"
         "waybar"
+        "mako"
+        "nm-applet --indicator"
       ];
 
       env = [
@@ -61,7 +63,7 @@
         "$mod, Q, killactive"
         "$mod, V, togglefloating"
         "$mod, F, fullscreen"
-        "$mod, R, exec, wofi --show drun"
+        "$mod, R, exec, rofi -show drun"
 
         "$mod, H, movefocus, l"
         "$mod, L, movefocus, r"
@@ -99,9 +101,63 @@
   };
 
 	programs.waybar = {
-	  enable = true;
-	};
-	xdg.configFile."waybar/config".source = ./waybar/config;
-	xdg.configFile."waybar/style.css".source = ./waybar/style.css;
+    enable = true;
+    systemd.enable = false; # matches your hyprland systemd.enable = false pattern — launched via exec-once instead
+
+    settings.mainBar = {
+      layer = "top";
+      position = "bottom";
+
+      modules-left = [ "hyprland/workspaces" "custom/right-arrow-dark" ];
+      modules-center = [
+        "custom/left-arrow-dark" "clock#1" "custom/left-arrow-light"
+        "custom/left-arrow-dark" "clock#2" "custom/right-arrow-dark"
+        "custom/right-arrow-light" "clock#3" "custom/right-arrow-dark"
+      ];
+      modules-right = [
+        "custom/left-arrow-dark" "pulseaudio" "custom/left-arrow-light"
+        "custom/left-arrow-dark" "memory" "custom/left-arrow-light"
+        "custom/left-arrow-dark" "cpu" "custom/left-arrow-light"
+        "custom/left-arrow-dark" "battery" "custom/left-arrow-light"
+        "custom/left-arrow-dark" "disk" "custom/left-arrow-light"
+        "custom/left-arrow-dark" "tray"
+      ];
+
+      "custom/left-arrow-dark" = { format = ""; tooltip = false; };
+      "custom/left-arrow-light" = { format = ""; tooltip = false; };
+      "custom/right-arrow-dark" = { format = ""; tooltip = false; };
+      "custom/right-arrow-light" = { format = ""; tooltip = false; };
+
+      "hyprland/workspaces" = {
+        disable-scroll = true;
+        format = "{name}";
+      };
+
+      "clock#1" = { format = "{:%a}"; tooltip = false; };
+      "clock#2" = { format = "{:%H:%M}"; tooltip = false; };
+      "clock#3" = { format = "{:%m-%d}"; tooltip = false; };
+
+      pulseaudio = {
+        format = "{icon} {volume:2}%";
+        format-bluetooth = "{icon}  {volume}%";
+        format-muted = "MUTE";
+        format-icons = { headphones = ""; default = [ "" "" ]; };
+        scroll-step = 5;
+        on-click = "pamixer -t";
+        on-click-right = "pavucontrol";
+      };
+      memory = { interval = 5; format = "Mem {}%"; };
+      cpu = { interval = 5; format = "CPU {usage:2}%"; };
+      battery = {
+        states = { good = 95; warning = 30; critical = 15; };
+        format = "{icon} {capacity}%";
+        format-icons = [ "" "" "" "" "" ];
+      };
+      disk = { interval = 5; format = "Disk {percentage_used:2}%"; path = "/"; };
+      tray = { icon-size = 20; };
+    };
+
+    style = builtins.readFile ./waybar.style.css;
+  };
   
 }
