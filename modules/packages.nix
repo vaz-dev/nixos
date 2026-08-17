@@ -15,6 +15,7 @@
 		kdePackages.dolphin
 		rofi
 		fastfetch
+		discord
 	];
 
 	programs.firefox.enable = true;
