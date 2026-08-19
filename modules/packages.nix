@@ -12,10 +12,15 @@
 		hyprpaper
 		bolt-launcher
 		networkmanagerapplet
-		kdePackages.dolphin
 		rofi
 		fastfetch
 		discord
+		spotify
+		evince
+		grim
+		slurp
+		nautilus
+		thunderbird
 	];
 
 	programs.firefox.enable = true;
