@@ -21,8 +21,11 @@
     settings = {
       ipc = "on";
       splash = false;
-      preload = [ "~/Pictures/wallpapers/current.jpg" ];
-      wallpaper = [ ",~/Pictures/wallpapers/current.jpg" ];
+      preload = [ "./bg.png" ];
+      wallpaper = [
+        "eDP-1,${./bg.png}"
+        "HDMI-A-2,${./bg.png}"
+      ];
     };
   };
 
@@ -163,6 +166,11 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      window.padding = { x = 2; y = 2; };
+      font = {
+        size = 13.0;
+        offset = { y = 1; x = 1; };
+      };
       terminal.shell = {
         program = "${pkgs.zellij}/bin/zellij";
         args = [ "--layout" "default" "attach" "-c" "main" ];
@@ -172,9 +180,6 @@
 
   programs.zellij = {
     enable = true;
-    settings = {
-      default_layout = "compact";
-    };
   };
 
   xdg.configFile."zellij/layouts/default.kdl".text = ''
@@ -187,7 +192,23 @@
 
   programs.helix = {
     enable = true;
-    settings.editor.theme = "ashen";
+    settings = {
+      theme = "ashen";
+      editor = {
+        lsp = {
+          display-messages = true;
+          display-inlay-hints = false;
+        };
+        end-of-line-diagnostics = "warning";
+        inline-diagnostics = {
+          cursor-line = "hint";
+          other-lines = "disable";
+        };
+      };
+      keys.normal = {
+        space.l = ":toggle lsp.display-inlay-hints";
+      };
+    };
   };
 
   programs.bash = {

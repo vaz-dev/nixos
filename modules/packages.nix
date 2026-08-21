@@ -21,6 +21,12 @@
 		slurp
 		nautilus
 		thunderbird
+		rustc
+		cargo
+		rustfmt
+		clippy
+		rust-analyzer
+		clang
 	];
 
 	programs.firefox.enable = true;
